@@ -1,0 +1,30 @@
+// NUMBER GUESSING GAME.
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main()
+{
+	int num, guess, tries = 0;
+	srand(time(0)); //seed random number generator
+	num = rand() % 20 + 1; // random number between 1 and 100
+	cout << "Welcome to my number guessing game!\n"<<endl;
+
+	do
+	{
+		cout << "Guess a number between 1 and 20 : ";
+		cin >> guess;
+		tries++;
+
+		if (guess > num)
+			cout << "Too high!Try again.\n\n";
+		else if (guess < num)
+			cout << "Too low!Try again.\n\n";
+		else
+			cout << endl<<"Correct Guess! You got it in " << tries << " guesses!"<<endl;
+	} while (guess != num);
+
+	return 0;
+}
