@@ -9,12 +9,12 @@ int main()
 {
 	int num, guess, tries = 0;
 	srand(time(0)); //seed random number generator
-	num = rand() % 20 + 1; // random number between 1 and 100
+	num = rand() % 100 + 1; // random number between 1 and 100
 	cout << "Welcome to my number guessing game!\n"<<endl;
 
 	do
 	{
-		cout << "Guess a number between 1 and 20 : ";
+		cout << "Guess a number between 1 and 100 : ";
 		cin >> guess;
 		tries++;
 
