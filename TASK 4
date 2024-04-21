@@ -4,13 +4,15 @@
 #include <string>
 #include <list>
 
+using namespace std;
+
 struct MyToDo {
-    std::string description;
+    string description;
     int priority;
-    std::string dueDate;
+    string dueDate;
 };
 
-std::list<MyToDo> toDoList;
+list<MyToDo> toDoList;
 
 bool addToList(const MyToDo& task) {
     if (toDoList.size() < 100) {
@@ -31,7 +33,7 @@ bool getNextItem(MyToDo& task) {
     }
 }
 
-bool getByPriority(std::list<MyToDo>& matches, int search) {
+bool getByPriority(list<MyToDo>& matches, int search) {
     matches.clear();
     for (const MyToDo& task : toDoList) {
         if (task.priority == search) {
@@ -43,13 +45,13 @@ bool getByPriority(std::list<MyToDo>& matches, int search) {
 
 void printToDo() {
     if (toDoList.empty()) {
-        std::cout << "Your to-do list is empty." << std::endl;
+        cout << "Your to-do list is empty." << endl;
     } else {
         for (const MyToDo& task : toDoList) {
-            std::cout << "Description: " << task.description << std::endl;
-            std::cout << "Priority: " << task.priority << std::endl;
-            std::cout << "Due Date: " << task.dueDate << std::endl;
-            std::cout << std::endl;
+            cout << "Description: " << task.description << endl;
+            cout << "Priority: " << task.priority << endl;
+            cout << "Due Date: " << task.dueDate << endl;
+            cout << endl;
         }
     }
 }
@@ -57,61 +59,61 @@ void printToDo() {
 int main() {
     char nextmove = 'y';
     while (nextmove == 'y' || nextmove == 'Y') {
-        std::cout << "What would you like to do?" << std::endl;
-        std::cout << "1. Add to my to-do list" << std::endl;
-        std::cout << "2. Display and remove the next item in my list" << std::endl;
-        std::cout << "3. Search for activities of a certain priority" << std::endl;
-        std::cout << "4. Print out my whole list" << std::endl;
-        std::cout << "5. Quit" << std::endl;
+        cout << "What would you like to do?" << endl;
+        cout << "1. Add to my to-do list" << endl;
+        cout << "2. Display and remove the next item in my list" << endl;
+        cout << "3. Search for activities of a certain priority" << endl;
+        cout << "4. Print out my whole list" << endl;
+        cout << "5. Quit" << endl;
         int choice;
-        std::cin >> choice;
+        cin >> choice;
 
         switch (choice) {
             case 1: {
                 MyToDo task;
-                std::cout << "What is the description of the activity?" << std::endl;
-                std::cin.ignore(); // Ignore the newline character in the input buffer
-                std::getline(std::cin, task.description);
-                std::cout << "How urgent is this? Rank 1-5. 1 for not really important, 5 for very important" << std::endl;
-                std::cin >> task.priority;
+                cout << "What is the description of the activity?" << endl;
+                cin.ignore(); // Ignore the newline character in the input buffer
+                getline(cin, task.description);
+                cout << "How urgent is this? Rank 1-5. 1 for not really important, 5 for very important" << endl;
+                cin >> task.priority;
                 while (task.priority < 1 || task.priority > 5) {
-                    std::cout << "Invalid priority. Please enter a number between 1 and 5." << std::endl;
-                    std::cin >> task.priority;
+                    cout << "Invalid priority. Please enter a number between 1 and 5." << endl;
+                    cin >> task.priority;
                 }
-                std::cout << "When is the due date? (day/month format)" << std::endl;
-                std::cin >> task.dueDate;
+                cout << "When is the due date? (day/month format)" << endl;
+                cin >> task.dueDate;
                 addToList(task);
                 break;
             }
             case 2: {
                 MyToDo task;
                 if (getNextItem(task)) {
-                    std::cout << "Description: " << task.description << std::endl;
-                    std::cout << "Priority: " << task.priority << std::endl;
-                    std::cout << "Due Date: " << task.dueDate << std::endl;
+                    cout << "Description: " << task.description << endl;
+                    cout << "Priority: " << task.priority << endl;
+                    cout << "Due Date: " << task.dueDate << endl;
                 } else {
-                    std::cout << "Your to-do list is empty." << std::endl;
+                    cout << "Your to-do list is empty." << endl;
                 }
                 break;
             }
             case 3: {
                 int search;
-                std::cout << "Enter a priority level to search for (1-5)" << std::endl;
-                std::cin >> search;
+                cout << "Enter a priority level to search for (1-5)" << endl;
+                cin >> search;
                 while (search < 1 || search > 5) {
-                    std::cout << "Invalid priority. Please enter a number between 1 and 5." << std::endl;
-                    std::cin >> search;
+                    cout << "Invalid priority. Please enter a number between 1 and 5." << endl;
+                    cin >> search;
                 }
-                std::list<MyToDo> matches;
+                list<MyToDo> matches;
                 if (getByPriority(matches, search)) {
-                    std::cout << "Tasks with priority " << search << ":" << std::endl;
+                    cout << "Tasks with priority " << search << ":" << endl;
                     for (const MyToDo& task : matches) {
-                        std::cout << "Description: " << task.description << std::endl;
-                        std::cout << "Priority: " << task.priority << std::endl;
-                        std::cout << "Due Date: " << task.dueDate << std::endl;
+                        cout << "Description: " << task.description << endl;
+                        cout << "Priority: " << task.priority << endl;
+                        cout << "Due Date: " << task.dueDate << endl;
                     }
                 } else {
-                    std::cout << "No tasks found with priority " << search << "." << std::endl;
+                    cout << "No tasks found with priority " << search << "." << endl;
                 }
                 break;
             }
@@ -124,17 +126,18 @@ int main() {
                 break;
             }
             default: {
-                std::cout << "Invalid choice. Please enter a number between 1 and 5." << std::endl;
+                cout << "Invalid choice. Please enter a number between 1 and 5." << endl;
                 break;
             }
         }
 
         if (nextmove != 'n') {
-            std::cout << "Would you like to continue? (y for YES)" << std::endl;
-            std::cin >> nextmove;
+            cout << "Would you like to continue? (y for YES)" << endl;
+            cin >> nextmove;
         }
     }
 
-    std::cout << "Good job keeping yourself on schedule!" << std::endl;
+    cout << "Good job keeping yourself on schedule!" << endl;
     return 0;
 }
+
